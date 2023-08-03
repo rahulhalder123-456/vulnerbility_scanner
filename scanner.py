@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import requests, re, urlparse
+import requests, re
+import urllib.parse as urlparse                                                                                                                            
 from bs4 import BeautifulSoup
 
 
@@ -76,4 +77,4 @@ class Scanner:
     def test_xss_in_form(self, form, url):
         xss_test_script = "<sCript>alert('test')</scriPt>"
         response = self.submit_form(form, xss_test_script, url)
-        return xss_test_script in response.content
+        return xss_test_script in response.content.decode()
